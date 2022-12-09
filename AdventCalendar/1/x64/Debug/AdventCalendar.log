@@ -1,0 +1,6 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (AdventCalendar.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  DayOne.cpp
+  Part1.cpp
+  Part2.cpp
+  Generating Code...
+  AdventCalendar.vcxproj -> C:\GitHub\AdventCalendar\AdventCalendar\1\x64\Debug\DayOne.exe
