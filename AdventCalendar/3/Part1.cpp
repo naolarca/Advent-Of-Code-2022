@@ -24,7 +24,7 @@ void PartOne::openFile() {
 	ifstream MyReadFile(inputFilename);
 
 	std::string inputText="";
-	
+	std::string tempCommon = "";
 
 	// read the file line by line (takes the file input and put it into a string)
 	while (getline(MyReadFile,inputText)) {
@@ -44,23 +44,23 @@ void PartOne::openFile() {
 				//si common in both
 				if (inputText[i] == inputText[j])
 				{
-					commonC = inputText[i];
-					std::cout << commonC;
+					tempCommon= inputText[i];
 				}
 				
 			}
 
 		}
 
-		std::cout << "\n";
+		commonC = tempCommon[0];
+		tempCommon = "";
+		
 
 		//calculer priorite
 		linePrioritieValue = getPriorite();
 
-
-		
-
 		totalsum += linePrioritieValue;
+
+		linePrioritieValue = 0;
 		lenghtLine = 0;
 		
 		
@@ -88,6 +88,7 @@ int PartOne::getPriorite()
 		tempCompteur++;
 	}
 	
+	tempCompteur = 27;
 	//boucle uppercase
 	for (int j = 0; j <= UPPERCASE.length(); j++)
 	{
