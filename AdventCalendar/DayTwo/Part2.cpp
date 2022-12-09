@@ -8,9 +8,17 @@ using namespace std;
 
 PartTwo::PartTwo(std::string filename) {
 	inputFilename = filename;
-	mostCalories = 0;
-	secondMostCalories = 0;
-	thirdMostCalories = 0;
+	rockValue = 1;
+	paperValue = 2;
+	scissorValue = 3;
+
+	lost = 0;
+	draw = 3;
+	win = 6;
+
+	lineScore = 0;
+	totalScore = 0;
+
 	openFile();
 }
 
@@ -19,92 +27,88 @@ void PartTwo::openFile() {
 	// Read from the text file
 	ifstream MyReadFile(inputFilename);
 
-	std::string inputText="";
-	std::string calorie = "";
+	std::string inputText = "";
+	std::string column1 = "";
+	std::string column2 = "";
+
 	std::stringstream ss;
 
-	int sommeCalories=0;
-	int sommeThirdBests = 0;
+	int sommeCalories = 0;
 	int intCalorie;
-	
+
 
 	// read the file line by line (takes the file input and put it into a string)
-	while (getline(MyReadFile,inputText)) {
-		inputText += '\n';
-		
-		//si ligne est vide
-		if(inputText == "\n")
-		{
-		
+	while (getline(MyReadFile, inputText)) {
 
-			//regarde si somme plus grande que biggest Calories
-			//si oui remplace biggest Calories par la somme
-			//decalage ajouter pour trois premieres positions
-			if (isBiggerFirst(sommeCalories))
-			{
-				thirdMostCalories = secondMostCalories;
-				secondMostCalories = mostCalories;
-				mostCalories = sommeCalories;
+		//si ligne contient A (ROCK)
+		if (inputText.find('A') != string::npos) {
+
+			//si ligne contient egalement X (LOST)
+			if (inputText.find('X') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += lost;
 			}
-			else if (isBiggerSecond(sommeCalories))
-			{
-				thirdMostCalories = secondMostCalories;
-				secondMostCalories = sommeCalories;
+			//si ligne contient egalement Y (DRAW)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += rockValue;
+				lineScore += draw;
 			}
-			else if (isBiggerThird(sommeCalories))
-			{
-				thirdMostCalories = sommeCalories;
+			//si ligne contient egalement Z (WIN)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += paperValue;
+				lineScore += win;
 			}
-
-
-
-			//on remet valeur de calorie a null et somme a zero
-			calorie = "";
-			sommeCalories = 0;
-			intCalorie = 0;
-			
-
 		}
+		//si ligne contient B (PAPER)
+		else if (inputText.find('B') != string::npos) {
 
-		//si ligne nest pas vide
-		else
-		{
-			//on rajoute calorie
-			calorie += inputText;
-			//met dans stringstram
-			ss << calorie;
-			//change en int
-			ss >> intCalorie;
-			
-
-			//clear everything
-			ss.clear();
-			calorie = "";
-
-			//on ajoute le int a la somme
-			sommeCalories += intCalorie;
-			intCalorie = 0;
-
+			//si ligne contient egalement X (LOST)
+			if (inputText.find('X') != string::npos) {
+				lineScore += rockValue;
+				lineScore += lost;
+			}
+			//si ligne contient egalement Y (DRAW)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += paperValue;
+				lineScore += draw;
+			}
+			//si ligne contient egalement Z (WIN)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += win;
+			}
 		}
-		
+		//si ligne contient C (SCISSOR)
+		else if (inputText.find('C') != string::npos) {
+
+			//si ligne contient egalement X (LOST)
+			if (inputText.find('X') != string::npos) {
+				lineScore += paperValue;
+				lineScore += lost;
+			}
+			//si ligne contient egalement Y (DRAW)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += draw;
+			}
+			//si ligne contient egalement Z (WIN)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += rockValue;
+				lineScore += win;
+			}
+		}
+		//sinon error
+		else cout << "error";
+
+		totalScore += lineScore;
+		lineScore = 0;
+
+
 	}
 
-	sommeThirdBests = mostCalories + secondMostCalories + thirdMostCalories;
-	cout << sommeThirdBests;
 
+	cout << totalScore;
 
 	// Close the file
 	MyReadFile.close();
-}
-
-bool PartTwo::isBiggerFirst(int inputNumber) {
-	return inputNumber >= mostCalories;
-}
-
-bool PartTwo::isBiggerSecond(int inputNumber) {
-	return inputNumber >= secondMostCalories;
-}
-
-bool PartTwo::isBiggerThird(int inputNumber) {
-	return inputNumber >= thirdMostCalories;
 }

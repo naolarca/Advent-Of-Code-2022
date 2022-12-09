@@ -8,7 +8,17 @@ using namespace std;
 
 PartOne::PartOne(std::string filename) {
 	inputFilename = filename;
-	mostCalories = 0;
+	rockValue=1;
+	paperValue=2;
+	scissorValue=3;
+	
+	lost=0;
+	draw=3;
+	win=6;
+
+	lineScore = 0;
+	totalScore = 0;
+
 	openFile();
 }
 
@@ -18,7 +28,9 @@ void PartOne::openFile() {
 	ifstream MyReadFile(inputFilename);
 
 	std::string inputText="";
-	std::string calorie = "";
+	std::string column1 = "";
+	std::string column2 = "";
+
 	std::stringstream ss;
 
 	int sommeCalories=0;
@@ -27,58 +39,76 @@ void PartOne::openFile() {
 
 	// read the file line by line (takes the file input and put it into a string)
 	while (getline(MyReadFile,inputText)) {
-		inputText += '\n';
 		
-		//si ligne est vide
-		if(inputText == "\n")
-		{
-		
+		//si ligne contient A (ROCK)
+		if (inputText.find('A') != string::npos) {
 
-			//regarde si somme plus grande que biggest Calories
-			//si oui remplace biggest Calories par la somme
-			if (isBigger(sommeCalories))
-			{
-				mostCalories = sommeCalories;
+			//si ligne contient egalement X (ROCK)
+			if (inputText.find('X') != string::npos) {
+				lineScore += rockValue;
+				lineScore += draw;
 			}
-
-			//on remet valeur de calorie a null et somme a zero
-			calorie = "";
-			sommeCalories = 0;
-			intCalorie = 0;
-			
-
+			//si ligne contient egalement Y (PAPER)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += paperValue;
+				lineScore += win;
+			}
+			//si ligne contient egalement Z (SCISSOR)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += lost;
+			}
 		}
+		//si ligne contient B (PAPER)
+		else if (inputText.find('B') != string::npos) {
 
-		//si ligne nest pas vide
-		else
-		{
-			//on rajoute calorie
-			calorie += inputText;
-			//met dans stringstram
-			ss << calorie;
-			//change en int
-			ss >> intCalorie;
-			
-
-			//clear everything
-			ss.clear();
-			calorie = "";
-
-			//on ajoute le int a la somme
-			sommeCalories += intCalorie;
-			intCalorie = 0;
-
+			//si ligne contient egalement X (ROCK)
+			if (inputText.find('X') != string::npos) {
+				lineScore += rockValue;
+				lineScore += lost;
+			}
+			//si ligne contient egalement Y (PAPER)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += paperValue;
+				lineScore += draw;
+			}
+			//si ligne contient egalement Z (SCISSOR)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += win;
+			}
 		}
+		//si ligne contient C (SCISSOR)
+		else if (inputText.find('C') != string::npos) {
+
+			//si ligne contient egalement X (ROCK)
+			if (inputText.find('X') != string::npos) {
+				lineScore += rockValue;
+				lineScore += win;
+			}
+			//si ligne contient egalement Y (PAPER)
+			if (inputText.find('Y') != string::npos) {
+				lineScore += paperValue;
+				lineScore += lost;
+			}
+			//si ligne contient egalement Z (SCISSOR)
+			if (inputText.find('Z') != string::npos) {
+				lineScore += scissorValue;
+				lineScore += draw;
+			}
+		}
+		//sinon error
+		else cout << "error";
+
+		totalScore += lineScore;
+		lineScore = 0;
+		
 		
 	}
 
-	cout << mostCalories;
-
+	
+	cout << totalScore;
 
 	// Close the file
 	MyReadFile.close();
-}
-
-bool PartOne::isBigger(int inputNumber) {
-	return inputNumber >= mostCalories;
 }

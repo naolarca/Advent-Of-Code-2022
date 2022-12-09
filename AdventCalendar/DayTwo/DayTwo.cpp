@@ -9,21 +9,21 @@ using namespace std;
 
 int main()
 {
-	string filename = "inputCalories.txt";
+	string filename = "strategyGuide.txt";
 
 	//TEST DAY ONE
 	cout << "TEST DAY TWO:\n";
 	cout << "====================================================================================\n";
 	cout << "PART ONE...\n";
-	cout << "The elf with the most calories has a total of \n";
+	cout << "The total score to rock paper scissor according to my strategy guide is\n";
 	PartOne PartOneTest(filename);
-	cout << " calories!\n\n";
+	cout << " points!\n\n";
 
 	//TEST DAY TWO
 	cout << "PART TWO\n";
-	cout << "The three elves with the most calories have a total of \n";
+	cout << "The total score to rock paper scissor according to my strategy guide is\n";
 	PartTwo PartTwoTest(filename);
-	cout << " calories!\n\n";
+	cout << " points!\n\n";
 
 	
 

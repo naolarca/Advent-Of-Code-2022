@@ -6,10 +6,19 @@ class PartOne
 {
 private:
 	std::string inputFilename;
-	int mostCalories;
+	int rockValue;
+	int paperValue;
+	int scissorValue;
+
+	int lost;
+	int draw;
+	int win;
+
+	int lineScore;
+	long totalScore;
 
 	void openFile();
-	bool isBigger(int inputNumber);
+	int addition();
 	
 
 public:
