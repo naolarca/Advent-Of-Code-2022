@@ -24,7 +24,7 @@
     <ProjectGuid>{4df8b3d3-4135-4e63-ba2b-a86b8e754b61}</ProjectGuid>
     <RootNamespace>AdventCalendar</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>DayOne</ProjectName>
+    <ProjectName>DayThree</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
