@@ -4,20 +4,22 @@
 #include <string>
 #include <sstream>
 
+const std::string LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const std::string UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 using namespace std;
 
 PartTwo::PartTwo(std::string filename) {
 	inputFilename = filename;
-	rockValue = 1;
-	paperValue = 2;
-	scissorValue = 3;
 
-	lost = 0;
-	draw = 3;
-	win = 6;
+	FirstElf = "";
+	SecondElf = "";
+	ThirdElf = "";
 
-	lineScore = 0;
-	totalScore = 0;
+	tempCommon = "";
+
+	linePrioritieValue = 0;
+	totalsum = 0;
 
 	openFile();
 }
@@ -28,87 +30,143 @@ void PartTwo::openFile() {
 	ifstream MyReadFile(inputFilename);
 
 	std::string inputText = "";
-	std::string column1 = "";
-	std::string column2 = "";
+	//std::string tempCommon = "";
 
-	std::stringstream ss;
+	std::string pack;
 
-	int sommeCalories = 0;
-	int intCalorie;
-
+	int compteurElves=0;
 
 	// read the file line by line (takes the file input and put it into a string)
 	while (getline(MyReadFile, inputText)) {
 
-		//si ligne contient A (ROCK)
-		if (inputText.find('A') != string::npos) {
+		inputText += "\n";
 
-			//si ligne contient egalement X (LOST)
-			if (inputText.find('X') != string::npos) {
-				lineScore += scissorValue;
-				lineScore += lost;
+		pack+= inputText;
+		
+		compteurElves++;
+		
+		std::string tempElf = "";
+
+		//regarde si peut etre separee en nouveau paquet de 3
+		if (compteurElves%3==0) {
+			
+
+			int dumbcmpt = 0;
+			
+			//separer par paquet de trois elfs
+			for (int l = 0; l < pack.length(); l++)
+			{
+				tempElf += pack[l];
+
+				if (pack[l] == '\n')
+				{
+					if (dumbcmpt == 0)
+					{
+						FirstElf = tempElf;
+						tempElf = "";
+						dumbcmpt++;
+					}
+					else if (dumbcmpt == 1)
+					{
+						SecondElf = tempElf;
+						tempElf = "";
+						dumbcmpt++;
+					}
+					else if (dumbcmpt == 2)
+					{
+						ThirdElf = tempElf;
+						tempElf = "";
+						dumbcmpt = 0;
+					}
+				}
 			}
-			//si ligne contient egalement Y (DRAW)
-			if (inputText.find('Y') != string::npos) {
-				lineScore += rockValue;
-				lineScore += draw;
+
+
+			//boucle elfe 1
+			for (int i = 0; i <= FirstElf.length(); i++)
+			{
+				//cout << inputText[i];
+				//boucle elfe 2
+				for (int j = 0; j <= SecondElf.length(); j++)
+				{
+
+					//std::cout << inputText[j];
+					//boucle elfe 3
+					for (int k = 0; k <= ThirdElf.length(); k++)
+					{
+						//si common in both
+						if (FirstElf[i] == SecondElf[j] && FirstElf[i] == ThirdElf[k])
+						{
+							//tempCommon.clear();
+							tempCommon += FirstElf[i];
+							
+							
+						}
+					}	
+				}
 			}
-			//si ligne contient egalement Z (WIN)
-			if (inputText.find('Z') != string::npos) {
-				lineScore += paperValue;
-				lineScore += win;
-			}
+			
+
+			
+			//on remet string elves a zero
+			FirstElf = "";
+			SecondElf = "";
+			ThirdElf = "";
+			pack = "";
+
+			
 		}
-		//si ligne contient B (PAPER)
-		else if (inputText.find('B') != string::npos) {
 
-			//si ligne contient egalement X (LOST)
-			if (inputText.find('X') != string::npos) {
-				lineScore += rockValue;
-				lineScore += lost;
-			}
-			//si ligne contient egalement Y (DRAW)
-			if (inputText.find('Y') != string::npos) {
-				lineScore += paperValue;
-				lineScore += draw;
-			}
-			//si ligne contient egalement Z (WIN)
-			if (inputText.find('Z') != string::npos) {
-				lineScore += scissorValue;
-				lineScore += win;
-			}
-		}
-		//si ligne contient C (SCISSOR)
-		else if (inputText.find('C') != string::npos) {
+		commonC = tempCommon[0];
 
-			//si ligne contient egalement X (LOST)
-			if (inputText.find('X') != string::npos) {
-				lineScore += paperValue;
-				lineScore += lost;
-			}
-			//si ligne contient egalement Y (DRAW)
-			if (inputText.find('Y') != string::npos) {
-				lineScore += scissorValue;
-				lineScore += draw;
-			}
-			//si ligne contient egalement Z (WIN)
-			if (inputText.find('Z') != string::npos) {
-				lineScore += rockValue;
-				lineScore += win;
-			}
-		}
-		//sinon error
-		else cout << "error";
-
-		totalScore += lineScore;
-		lineScore = 0;
+		//calculer priorite
+		linePrioritieValue = getPriorite(commonC);
+		
+		
+		if (linePrioritieValue!=27) totalsum += linePrioritieValue;
+		
+		tempCommon = "";
+		linePrioritieValue = 0;
+		
 
 
 	}
 
 
-	cout << totalScore;
+	std::cout << totalsum;
 
 	// Close the file
 	MyReadFile.close();
+}
+
+int PartTwo::getPriorite(char c)
+{
+	int tempCompteur = 1;
+	//boucle lowercase
+	for (int i = 0; i <= LOWERCASE.length(); i++)
+	{
+		//check if letter is same
+		if (c == LOWERCASE[i])
+		{
+			return tempCompteur;
+		}
+
+		tempCompteur++;
+	}
+
+	tempCompteur = 27;
+	//boucle uppercase
+	for (int j = 0; j <= UPPERCASE.length(); j++)
+	{
+		//check if letter is same
+		if (c == UPPERCASE[j])
+		{
+			return tempCompteur;
+		}
+
+		tempCompteur++;
+
+	}
+
+	return -1;
 }

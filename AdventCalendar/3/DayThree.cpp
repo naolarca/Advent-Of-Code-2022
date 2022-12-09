@@ -21,9 +21,9 @@ int main()
 
 	//TEST DAY TWO
 	cout << "PART TWO\n";
-	cout << "The total score to rock paper scissor according to my strategy guide is\n";
+	cout << "The sum priorities of the item types that are common to 3 consecutive elves is\n";
 	PartTwo PartTwoTest(filename);
-	cout << " points!\n\n";
+	cout << " !\n\n";
 
 	
 
