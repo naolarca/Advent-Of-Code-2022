@@ -21,7 +21,7 @@ int main()
 
 	//TEST DAY TWO
 	cout << "PART TWO\n";
-	cout << "The number of assignment pairs that overlap each other is\n";
+	cout << "The crate on top of each stack are \n";
 	PartTwo PartTwoTest(filename);
 	cout << " !\n\n";
 
