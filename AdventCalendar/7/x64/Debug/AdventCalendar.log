@@ -1,0 +1,4 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (AdventCalendar.vcxproj, DayFive.vcxproj, DayFour.vcxproj, DayOne.vcxproj, DaySix.vcxproj, DayThree.vcxproj, DayTwo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Part1.cpp
+C:\GitHub\AdventCalendar\AdventCalendar\7\Part1.cpp(33,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  AdventCalendar.vcxproj -> C:\GitHub\AdventCalendar\AdventCalendar\7\x64\Debug\DaySeven.exe

@@ -57,6 +57,7 @@ void PartOne::openFile() {
 					else isChanged = true;
 				}
 			}
+	
 		}
 
 

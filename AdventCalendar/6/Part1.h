@@ -6,6 +6,7 @@ class PartOne
 {
 private:
 	std::string inputFilename;
+	
 
 	char letter1;
 	char letter2;

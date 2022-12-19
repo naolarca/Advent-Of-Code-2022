@@ -20,10 +20,10 @@ int main()
 	cout << " !\n\n";
 
 	//TEST DAY TWO
-	/*cout << "PART TWO\n";
-	cout << "The crate on top of each stack are \n";
+	cout << "PART TWO\n";
+	cout << "The position of marker is \n";
 	PartTwo PartTwoTest(filename);
-	cout << " !\n\n";*/
+	cout << " !\n\n";
 
 	
 

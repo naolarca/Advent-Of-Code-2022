@@ -1,0 +1,6 @@
+C:\GitHub\AdventCalendar\AdventCalendar\DayTwo\x64\Debug\DayOne.exe
+C:\GitHub\AdventCalendar\AdventCalendar\3\x64\Debug\DayThree.exe
+C:\GitHub\AdventCalendar\AdventCalendar\4\x64\Debug\DayFour.exe
+C:\GitHub\AdventCalendar\AdventCalendar\5\x64\Debug\DayFive.exe
+C:\GitHub\AdventCalendar\AdventCalendar\6\x64\Debug\DaySix.exe
+C:\GitHub\AdventCalendar\AdventCalendar\7\x64\Debug\DaySeven.exe
